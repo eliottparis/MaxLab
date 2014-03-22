@@ -603,17 +603,19 @@
 				"box" : 				{
 					"bdcolor" : [ 0.503678, 0.503678, 0.503678, 1.0 ],
 					"bgcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-					"border" : 4,
+					"border" : 2,
 					"buffername" : "test",
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"cornersize" : 355,
+					"cornersize" : 8,
 					"id" : "obj-2",
 					"maxclass" : "circwaveform~",
 					"nbpoints" : 1442,
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 47.0, 304.0, 229.0, 229.0 ],
-					"waveformcolor" : [ 0.501961, 0.501961, 0.501961, 1.0 ]
+					"waveformcolor" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
+					"wfradius" : 0.77,
+					"zoom" : 0.39
 				}
 
 			}

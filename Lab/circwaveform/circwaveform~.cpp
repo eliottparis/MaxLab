@@ -141,12 +141,14 @@ int C74_EXPORT main()
 	CLASS_ATTR_CATEGORY             (c, "cornersize", 0, "Appearance");
     CLASS_ATTR_LABEL                (c, "cornersize", 0, "Corner Size");
     CLASS_ATTR_DEFAULT              (c, "cornersize", 0, "0");
+	CLASS_ATTR_FILTER_MIN			(c, "cornersize", 0);
     CLASS_ATTR_SAVE                 (c, "cornersize", 1);
 	
 	CLASS_ATTR_LONG					(c, "border", 0, t_circwaveform, f_bordersize);
 	CLASS_ATTR_CATEGORY             (c, "border", 0, "Appearance");
     CLASS_ATTR_LABEL                (c, "border", 0, "Border Size");
     CLASS_ATTR_DEFAULT              (c, "border", 0, "1");
+	CLASS_ATTR_FILTER_MIN			(c, "border", 0);
     CLASS_ATTR_SAVE                 (c, "border", 1);
 	
 	CLASS_ATTR_DOUBLE				(c, "zoom", 0, t_circwaveform, f_zoom_factor);
@@ -342,7 +344,7 @@ t_max_err circwaveform_notify(t_circwaveform *x, t_symbol *s, t_symbol *msg, voi
 	{
 		name = (t_symbol *)object_method((t_object *)data, gensym("getname"));
 		
-		if(name == gensym("bgcolor") || name == gensym("bdcolor") || name == gensym("cornersize") || name == gensym("border"))
+		if(name == gensym("bgcolor") || name == gensym("bdcolor") || name == gensym("cornersize"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
 		}
@@ -353,6 +355,12 @@ t_max_err circwaveform_notify(t_circwaveform *x, t_symbol *s, t_symbol *msg, voi
 		else if (name == gensym("cursorcolor"))
 		{
 			jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
+		}
+		else if(name == gensym("border"))
+		{
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("background_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("cursor_layer"));
+			jbox_invalidate_layer((t_object *)x, NULL, gensym("waveform_layer"));
 		}
 		else if (name == gensym("selectioncolor"))
 		{
@@ -395,7 +403,7 @@ void draw_background(t_circwaveform *x,  t_object *view, t_rect *rect)
 {
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("background_layer"), rect->width, rect->height);
     
-	long bdwidth = x->f_bordersize;
+	double bdwidth = (x->f_bordersize*0.5);
 	
 	if (g)
 	{
@@ -408,9 +416,11 @@ void draw_background(t_circwaveform *x,  t_object *view, t_rect *rect)
 		
 		jgraphics_set_source_jrgba(g, &x->f_color_bg);
 		jgraphics_fill_preserve(g);
+		
 		jgraphics_set_source_jrgba(g, &x->f_color_bd);
-		jgraphics_set_line_width(g, bdwidth);
+		jgraphics_set_line_width(g, bdwidth*2);
 		jgraphics_stroke(g);
+		
 		
 		jbox_end_layer((t_object*)x, view, gensym("background_layer"));
 	}
