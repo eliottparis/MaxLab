@@ -7,20 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C02454C18DDD49F00BC5D3E /* defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C02454A18DDD49F00BC5D3E /* defs.h */; };
-		2C02454D18DDD49F00BC5D3E /* Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C02454B18DDD49F00BC5D3E /* Tools.h */; };
+		2C02455318DDD7E600BC5D3E /* ep.commonsyms.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C02454F18DDD7E600BC5D3E /* ep.commonsyms.h */; };
+		2C02455418DDD7E600BC5D3E /* ep.defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C02455018DDD7E600BC5D3E /* ep.defs.h */; };
+		2C02455518DDD7E600BC5D3E /* ep.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C02455118DDD7E600BC5D3E /* ep.max.h */; };
+		2C02455618DDD7E600BC5D3E /* ep.tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C02455218DDD7E600BC5D3E /* ep.tools.h */; };
+		2C02455A18DDD98700BC5D3E /* ep.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C02455918DDD98700BC5D3E /* ep.max.cpp */; };
 		2C7A069818DDC59600B69DF5 /* MaxAudioAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7A069718DDC59600B69DF5 /* MaxAudioAPI.framework */; };
 		2C91DB1E18DC6BC9000F493D /* circwaveform~.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2C91DB1D18DC6BC9000F493D /* circwaveform~.cpp */; };
-		2C91DB2018DC6CB1000F493D /* circwaveform~.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C91DB1F18DC6CB1000F493D /* circwaveform~.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2C02454A18DDD49F00BC5D3E /* defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
-		2C02454B18DDD49F00BC5D3E /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		2C02454F18DDD7E600BC5D3E /* ep.commonsyms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ep.commonsyms.h; sourceTree = "<group>"; };
+		2C02455018DDD7E600BC5D3E /* ep.defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ep.defs.h; sourceTree = "<group>"; };
+		2C02455118DDD7E600BC5D3E /* ep.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ep.max.h; sourceTree = "<group>"; };
+		2C02455218DDD7E600BC5D3E /* ep.tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ep.tools.h; sourceTree = "<group>"; };
+		2C02455918DDD98700BC5D3E /* ep.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ep.max.cpp; sourceTree = "<group>"; };
 		2C70EADF18B608F000DC6275 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		2C7A069718DDC59600B69DF5 /* MaxAudioAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MaxAudioAPI.framework; path = "../../SDKs/max6-sdk/c74support/msp-includes/MaxAudioAPI.framework"; sourceTree = "<group>"; };
 		2C91DB1D18DC6BC9000F493D /* circwaveform~.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "circwaveform~.cpp"; sourceTree = "<group>"; };
-		2C91DB1F18DC6CB1000F493D /* circwaveform~.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "circwaveform~.h"; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* circwaveform~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "circwaveform~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -39,9 +43,9 @@
 		089C166AFE841209C02AAC07 /* iterator */ = {
 			isa = PBXGroup;
 			children = (
-				2C70EADF18B608F000DC6275 /* maxmspsdk.xcconfig */,
 				08FB77ADFE841716C02AAC07 /* Source */,
-				2C02454918DDD49F00BC5D3E /* lib */,
+				2C02454E18DDD7E600BC5D3E /* lib */,
+				2C70EADF18B608F000DC6275 /* maxmspsdk.xcconfig */,
 				2C7A069718DDC59600B69DF5 /* MaxAudioAPI.framework */,
 				19C28FB4FE9D528D11CA2CBB /* Products */,
 			);
@@ -52,7 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				2C91DB1D18DC6BC9000F493D /* circwaveform~.cpp */,
-				2C91DB1F18DC6CB1000F493D /* circwaveform~.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -65,11 +68,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2C02454918DDD49F00BC5D3E /* lib */ = {
+		2C02454E18DDD7E600BC5D3E /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				2C02454A18DDD49F00BC5D3E /* defs.h */,
-				2C02454B18DDD49F00BC5D3E /* Tools.h */,
+				2C02454F18DDD7E600BC5D3E /* ep.commonsyms.h */,
+				2C02455018DDD7E600BC5D3E /* ep.defs.h */,
+				2C02455118DDD7E600BC5D3E /* ep.max.h */,
+				2C02455918DDD98700BC5D3E /* ep.max.cpp */,
+				2C02455218DDD7E600BC5D3E /* ep.tools.h */,
 			);
 			name = lib;
 			path = ../lib;
@@ -82,9 +88,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C02454D18DDD49F00BC5D3E /* Tools.h in Headers */,
-				2C02454C18DDD49F00BC5D3E /* defs.h in Headers */,
-				2C91DB2018DC6CB1000F493D /* circwaveform~.h in Headers */,
+				2C02455318DDD7E600BC5D3E /* ep.commonsyms.h in Headers */,
+				2C02455618DDD7E600BC5D3E /* ep.tools.h in Headers */,
+				2C02455418DDD7E600BC5D3E /* ep.defs.h in Headers */,
+				2C02455518DDD7E600BC5D3E /* ep.max.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C02455A18DDD98700BC5D3E /* ep.max.cpp in Sources */,
 				2C91DB1E18DC6BC9000F493D /* circwaveform~.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

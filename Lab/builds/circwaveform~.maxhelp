@@ -37,8 +37,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 242.5, 76.0, 150.0, 20.0 ],
-					"presentation_rect" : [ 242.5, 75.0, 0.0, 0.0 ]
+					"patching_rect" : [ 242.5, 76.0, 150.0, 20.0 ]
 				}
 
 			}
@@ -79,7 +78,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 661.0, 164.0, 50.0, 18.0 ],
+					"patching_rect" : [ 665.0, 102.0, 50.0, 18.0 ],
 					"text" : "replace"
 				}
 
@@ -163,7 +162,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 725.0, 201.0, 154.0, 20.0 ],
+					"patching_rect" : [ 725.0, 168.0, 154.0, 20.0 ],
 					"text" : "loadmess replace anton.aif"
 				}
 
@@ -261,7 +260,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
-					"patching_rect" : [ 725.0, 242.0, 87.0, 20.0 ],
+					"patching_rect" : [ 725.0, 209.0, 87.0, 20.0 ],
 					"text" : "buffer~ tost 10"
 				}
 
@@ -331,7 +330,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 434.0, 46.0, 148.0, 20.0 ],
+					"patching_rect" : [ 616.0, 521.0, 148.0, 20.0 ],
 					"text" : "loadmess buffername test"
 				}
 
@@ -345,7 +344,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "bang" ],
-					"patching_rect" : [ 725.0, 56.0, 60.0, 20.0 ],
+					"patching_rect" : [ 725.0, 18.0, 60.0, 20.0 ],
 					"text" : "loadbang"
 				}
 
@@ -539,7 +538,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 767.0, 132.0, 115.0, 18.0 ],
+					"patching_rect" : [ 767.0, 94.0, 115.0, 18.0 ],
 					"text" : "replace sho0630.aif"
 				}
 
@@ -553,7 +552,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 725.0, 85.0, 119.0, 18.0 ],
+					"patching_rect" : [ 725.0, 47.0, 119.0, 18.0 ],
 					"text" : "replace drumloop.aif"
 				}
 
@@ -567,7 +566,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "float", "bang" ],
-					"patching_rect" : [ 725.0, 166.0, 124.0, 20.0 ],
+					"patching_rect" : [ 725.0, 128.0, 124.0, 20.0 ],
 					"text" : "buffer~ test 10"
 				}
 
@@ -581,7 +580,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 745.0, 108.0, 99.0, 18.0 ],
+					"patching_rect" : [ 745.0, 70.0, 99.0, 18.0 ],
 					"text" : "replace anton.aif"
 				}
 
@@ -605,12 +604,12 @@
 					"bdcolor" : [ 0.503678, 0.503678, 0.503678, 1.0 ],
 					"bgcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
 					"border" : 4,
-					"buffername" : "tost",
+					"buffername" : "test",
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"cornersize" : 355,
 					"id" : "obj-2",
 					"maxclass" : "circwaveform~",
-					"nbpoints" : 1440,
+					"nbpoints" : 1442,
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 47.0, 304.0, 229.0, 229.0 ],
@@ -626,7 +625,7 @@
 					"numinlets" : 5,
 					"numoutlets" : 6,
 					"outlettype" : [ "float", "float", "float", "float", "list", "" ],
-					"patching_rect" : [ 434.0, 76.0, 256.0, 64.0 ]
+					"patching_rect" : [ 616.0, 551.0, 256.0, 64.0 ]
 				}
 
 			}
@@ -639,7 +638,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 585.0, 46.0, 78.0, 18.0 ],
+					"patching_rect" : [ 767.0, 521.0, 78.0, 18.0 ],
 					"text" : "normalize $1"
 				}
 
