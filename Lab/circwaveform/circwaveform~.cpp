@@ -31,13 +31,14 @@ typedef struct  _circwaveform
 	long			f_cornersize;
 	long			f_bordersize;
 	
-	double			f_center;
-	
 	long			f_number_of_points;
 	
 	double			f_selection_start;
 	double			f_selection_end;
 	double			f_position;
+	
+	double			f_center;
+	double			f_max_radius;
     
 } t_circwaveform;
 
@@ -392,11 +393,12 @@ void circwaveform_paint(t_circwaveform *x, t_object *view)
 	jbox_get_rect_for_view((t_object *)x, view, &rect);
 	
 	x->f_center = rect.width * 0.5;
+	x->f_max_radius = x->f_center - x->f_bordersize;
 	
 	draw_background(x, view, &rect);
 	//draw_selection(x, view, &rect);
-	draw_cursor(x, view, &rect);
 	draw_waveform(x, view, &rect);
+	draw_cursor(x, view, &rect);
 }
 
 void draw_background(t_circwaveform *x,  t_object *view, t_rect *rect)
@@ -494,7 +496,7 @@ void draw_waveform(t_circwaveform *x,  t_object *view, t_rect *rect)
 	double v_azimuth[3], v_ordinate[3];
 	
 	double pixelRange	= (rect->height * 0.25 - x->f_bordersize*2);
-	double cRad			= (rect->height * 0.5 - x->f_bordersize*2) * x->f_waveform_radius;
+	double cRad			= x->f_max_radius * x->f_waveform_radius;
 	
 	t_jrgba innerColor = x->f_color_waveform;
 	
@@ -556,8 +558,10 @@ void draw_waveform(t_circwaveform *x,  t_object *view, t_rect *rect)
 		 
 		*/
 		
-		v_azimuth[0]	= EP_2PI - wrap_twopi(( (double)(0) / (double)x->f_number_of_points) * EP_2PI);
-		v_ordinate[0]	= clip_minmax(cRad + ( x->f_display_buffer[0] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
+		jgraphics_rotate(g, EP_PI2);
+		
+		v_azimuth[0]	= EP_2PI - wrap_twopi(( (double)(0) / (double)x->f_number_of_points) * EP_2PI + EP_PI2);
+		v_ordinate[0]	= clip_minmax(cRad + 4 + ( x->f_display_buffer[0] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
 		
 		begin.x = abscissa(v_ordinate[0], v_azimuth[0]);
 		begin.y = ordinate(v_ordinate[0], v_azimuth[0]);
@@ -566,13 +570,13 @@ void draw_waveform(t_circwaveform *x,  t_object *view, t_rect *rect)
 		
 		for (int i = 0; i < x->f_number_of_points; i += 3)
 		{
-			v_azimuth[0]	= EP_2PI - wrap_twopi(( (double)(i-2) / (double)x->f_number_of_points) * EP_2PI);
-			v_azimuth[1]	= EP_2PI - wrap_twopi(( (double)(i-1) / (double)x->f_number_of_points) * EP_2PI);
-			v_azimuth[2]	= EP_2PI - wrap_twopi(( (double)( i ) / (double)x->f_number_of_points) * EP_2PI);
+			v_azimuth[0]	= EP_2PI - wrap_twopi(( (double)(i-2) / (double)x->f_number_of_points) * EP_2PI + EP_PI2);
+			v_azimuth[1]	= EP_2PI - wrap_twopi(( (double)(i-1) / (double)x->f_number_of_points) * EP_2PI + EP_PI2);
+			v_azimuth[2]	= EP_2PI - wrap_twopi(( (double)( i ) / (double)x->f_number_of_points) * EP_2PI + EP_PI2);
 			
-			v_ordinate[0]	= clip_minmax(cRad + ( x->f_display_buffer[i-2] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
-			v_ordinate[1]	= clip_minmax(cRad + ( x->f_display_buffer[i-1] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
-			v_ordinate[2]	= clip_minmax(cRad + ( x->f_display_buffer[ i ] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
+			v_ordinate[0]	= clip_minmax(cRad + 4+ ( x->f_display_buffer[i-2] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
+			v_ordinate[1]	= clip_minmax(cRad + 4+ ( x->f_display_buffer[i-1] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
+			v_ordinate[2]	= clip_minmax(cRad + 4+ ( x->f_display_buffer[ i ] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
 			
 			pt[0].x = abscissa(v_ordinate[0], v_azimuth[0]);
 			pt[0].y = ordinate(v_ordinate[0], v_azimuth[0]);
@@ -587,22 +591,25 @@ void draw_waveform(t_circwaveform *x,  t_object *view, t_rect *rect)
 		}
 		
 		jgraphics_line_to(g, begin.x, begin.y);
-		jgraphics_arc(g, 0, 0, cRad, 0, EP_2PI);
+		jgraphics_arc(g, 0, 0, cRad + 4, 0, EP_2PI);
 		jgraphics_close_path(g);
-		jgraphics_fill(g);
+		jgraphics_fill_preserve(g);
+		
+		jgraphics_set_source_jrgba(g, &innerColor);
+		jgraphics_stroke(g);
 		
 		
 		jgraphics_move_to(g, begin.x, begin.y);
 		
 		for (int i = 0; i < x->f_number_of_points; i += 3)
 		{
-			v_azimuth[0]	= EP_2PI - wrap_twopi(( (double)(i-2) / (double)x->f_number_of_points) * EP_2PI);
-			v_azimuth[1]	= EP_2PI - wrap_twopi(( (double)(i-1) / (double)x->f_number_of_points) * EP_2PI);
-			v_azimuth[2]	= EP_2PI - wrap_twopi(( (double)( i ) / (double)x->f_number_of_points) * EP_2PI);
+			v_azimuth[0]	= EP_2PI - wrap_twopi(( (double)(i-2) / (double)x->f_number_of_points) * EP_2PI + EP_PI2);
+			v_azimuth[1]	= EP_2PI - wrap_twopi(( (double)(i-1) / (double)x->f_number_of_points) * EP_2PI + EP_PI2);
+			v_azimuth[2]	= EP_2PI - wrap_twopi(( (double)( i ) / (double)x->f_number_of_points) * EP_2PI + EP_PI2);
 			
-			v_ordinate[0]	= clip_minmax(cRad - ( x->f_display_buffer[i-2] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
-			v_ordinate[1]	= clip_minmax(cRad - ( x->f_display_buffer[i-1] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
-			v_ordinate[2]	= clip_minmax(cRad - ( x->f_display_buffer[ i ] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
+			v_ordinate[0]	= clip_minmax(cRad - 4-( x->f_display_buffer[i-2] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
+			v_ordinate[1]	= clip_minmax(cRad - 4-( x->f_display_buffer[i-1] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
+			v_ordinate[2]	= clip_minmax(cRad - 4-( x->f_display_buffer[ i ] * pixelRange * x->f_zoom_factor), 0, rect->height * 0.5 - x->f_bordersize - 2);
 			
 			pt[0].x = abscissa(v_ordinate[0], v_azimuth[0]);
 			pt[0].y = ordinate(v_ordinate[0], v_azimuth[0]);
@@ -617,11 +624,14 @@ void draw_waveform(t_circwaveform *x,  t_object *view, t_rect *rect)
 		}
 		
 		jgraphics_line_to(g, begin.x, begin.y);
-		jgraphics_arc(g, 0, 0, cRad, 0, EP_2PI);
+		jgraphics_arc(g, 0, 0, cRad - 4, 0, EP_2PI);
 		jgraphics_close_path(g);
 		
 		jgraphics_set_source_jrgba(g, &innerColor);
-		jgraphics_fill(g);
+		jgraphics_fill_preserve(g);
+		
+		jgraphics_set_source_jrgba(g, &x->f_color_waveform);
+		jgraphics_stroke(g);
 		
 		jbox_end_layer((t_object*)x, view, gensym("waveform_layer"));
 	}
@@ -633,8 +643,10 @@ void draw_cursor(t_circwaveform *x, t_object *view, t_rect *rect)
 	t_pt pt;
 	t_jgraphics *g = jbox_start_layer((t_object *)x, view, gensym("cursor_layer"), rect->width, rect->height);
 	
-	double cRad = (rect->height * 0.5 - x->f_bordersize*2);
+	double cRad = (rect->height * 0.5 - x->f_bordersize - 4);
+	//double azimuth_position = (1 - x->f_position) * EP_2PI;
 	double azimuth_position = (1 - x->f_position) * EP_2PI;
+	double cRad2			= x->f_max_radius * x->f_waveform_radius;
 	
 	if (g)
 	{
@@ -642,8 +654,17 @@ void draw_cursor(t_circwaveform *x, t_object *view, t_rect *rect)
 		jgraphics_matrix_init(&transform, 1, 0, 0, -1, x->f_center, x->f_center);
 		jgraphics_set_matrix(g, &transform);
 		
+		jgraphics_rotate(g, EP_PI2);
+		
 		jgraphics_set_source_jrgba(g, &x->f_color_cursor);
 		
+		jgraphics_set_line_width(g, 4);
+		jgraphics_set_line_cap(g, JGRAPHICS_LINE_CAP_ROUND);
+		
+		jgraphics_arc_negative(g, 0, 0, cRad2, 0, azimuth_position);
+		jgraphics_stroke(g);
+		
+		/*
 		pt.x = abscissa(cRad, azimuth_position);
 		pt.y = ordinate(cRad, azimuth_position);
 		
@@ -652,6 +673,7 @@ void draw_cursor(t_circwaveform *x, t_object *view, t_rect *rect)
 		jgraphics_move_to(g, 0, 0);
 		jgraphics_line_to(g, pt.x, pt.y);
 		jgraphics_stroke(g);
+		*/
 		
 		jbox_end_layer((t_object*)x, view, gensym("cursor_layer"));
 	}
