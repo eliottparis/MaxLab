@@ -1,0 +1,3 @@
+[submodule "SDKs/max6-sdk"]
+	path = SDKs/max6-sdk
+	url = https://github.com/eliottparis/max6-sdk.git
