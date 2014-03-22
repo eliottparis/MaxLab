@@ -10,7 +10,7 @@
 #ifndef __DEF_EP_TOOLS__
 #define __DEF_EP_TOOLS__
 
-#include "defs.h"
+#include "ep.defs.h"
 
 //! The minimum function
 /** This function returns the minimum value between two values
