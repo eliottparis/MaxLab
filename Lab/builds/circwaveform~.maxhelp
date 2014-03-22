@@ -29,6 +29,21 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"attr" : "cursorcolor",
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-40",
+					"maxclass" : "attrui",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 61.0, 46.0, 150.0, 20.0 ],
+					"presentation_rect" : [ 65.0, 41.0, 0.0, 0.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"attr" : "border",
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -317,7 +332,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 64.0, 46.0, 150.0, 20.0 ]
+					"patching_rect" : [ 61.0, 70.0, 150.0, 20.0 ]
 				}
 
 			}
@@ -603,19 +618,20 @@
 				"box" : 				{
 					"bdcolor" : [ 0.503678, 0.503678, 0.503678, 1.0 ],
 					"bgcolor" : [ 0.25, 0.25, 0.25, 1.0 ],
-					"border" : 6,
+					"border" : 8,
 					"buffername" : "test",
 					"color" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"cornersize" : 316,
+					"cornersize" : 284,
+					"cursorcolor" : [ 0.75, 0.75, 0.75, 1.0 ],
 					"id" : "obj-2",
 					"maxclass" : "circwaveform~",
-					"nbpoints" : 1442,
+					"nbpoints" : 180,
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 47.0, 297.5, 291.0, 291.0 ],
-					"waveformcolor" : [ 0.654568, 0.633894, 0.587282, 1.0 ],
-					"wfradius" : 0.45,
-					"zoom" : 0.98
+					"patching_rect" : [ 47.0, 297.5, 272.0, 272.0 ],
+					"waveformcolor" : [ 0.342812, 0.505686, 0.716602, 1.0 ],
+					"wfradius" : 0.38,
+					"zoom" : 2.68
 				}
 
 			}
@@ -932,6 +948,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-2", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-40", 0 ]
 				}
 
 			}
