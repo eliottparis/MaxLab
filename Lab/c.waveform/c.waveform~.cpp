@@ -712,7 +712,6 @@ void draw_horiz_waveform_sticks(t_waveform *x,  t_object *view, t_rect *rect)
 		return;
 	
 	t_pt	pt[2];
-	double	v_azimuth[3], v_ordinate[3];
 	
 	double maxHeight = rect->height - (x->f_bordersize*2) - 4;
 	double centerHeight = rect->height * 0.5;

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9A504CA4-17BD-4A40-AC08-8E07F6E92747</string>
+	<key>IDESourceControlProjectName</key>
+	<string>c.waveform~</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>227B06B7-D402-4A54-B94F-D823484B8842</key>
+		<string>https://github.com/eliottparis/MaxLab.git</string>
+		<key>7D094556-2771-4A25-98C5-C82AA62AB6E8</key>
+		<string>https://github.com/eliottparis/max6-sdk.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Lab/c.waveform/c.waveform~.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>227B06B7-D402-4A54-B94F-D823484B8842</key>
+		<string>../../../..</string>
+		<key>7D094556-2771-4A25-98C5-C82AA62AB6E8</key>
+		<string>../../../../SDKs/max6-sdk</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/eliottparis/MaxLab.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>227B06B7-D402-4A54-B94F-D823484B8842</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7D094556-2771-4A25-98C5-C82AA62AB6E8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>max6-sdk</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>227B06B7-D402-4A54-B94F-D823484B8842</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MaxLab</string>
+		</dict>
+	</array>
+</dict>
+</plist>

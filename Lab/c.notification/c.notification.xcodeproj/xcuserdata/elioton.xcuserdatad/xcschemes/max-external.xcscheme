@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0500"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2FBBEAD608F335360078DB84"
-               BuildableName = "c.waveform~.mxo"
+               BuildableName = "c.notification.mxo"
                BlueprintName = "max-external"
-               ReferencedContainer = "container:c.waveform~.xcodeproj">
+               ReferencedContainer = "container:c.notification.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
