@@ -7,13 +7,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>ep.timestretch~</string>
+	<string>c.waveform~</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.cicm.ep-timestretch-</string>
+	<string>com.cicm.c-waveform-</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLongVersionString</key>
-	<string>ep.timestretch~ Beta 0.1, Copyright 2010 Cycling '74</string>
+	<string>c.waveform~ Beta 0.1, Copyright 2010 Cycling '74</string>
 	<key>CFBundlePackageType</key>
 	<string>iLaX</string>
 	<key>CFBundleShortVersionString</key>
@@ -27,7 +27,7 @@
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>5B130a</string>
+	<string>5B1008</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
@@ -35,8 +35,8 @@
 	<key>DTSDKName</key>
 	<string>macosx10.9</string>
 	<key>DTXcode</key>
-	<string>0510</string>
+	<string>0511</string>
 	<key>DTXcodeBuild</key>
-	<string>5B130a</string>
+	<string>5B1008</string>
 </dict>
 </plist>
