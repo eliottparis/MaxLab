@@ -113,6 +113,10 @@ void *notif_new(t_symbol *s, int ac, t_atom *av)
 	
 	if (x)
 	{
+		#if (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_8)
+			object_error((t_object*)x, "Notifications require Mac OSX 10.8 min");
+		#endif
+		
 		//x->f_title = x->f_subtitle = x->f_description = ep_sym_nothing;
 		//x->f_title = x->f_subtitle = ep_sym_nothing;
 		
