@@ -7,10 +7,6 @@
 #ifndef __DEF_EP_MAX__
 #define __DEF_EP_MAX__
 
-#include "ep.defs.h"
-#include "ep.tools.h"
-#include "ep.commonsyms.h"
-
 extern "C"
 {
 #include <ext.h>
@@ -27,6 +23,10 @@ extern "C"
 #include <ext_parameter.h>
 #include <jpatcher_syms.h>
 }
+
+#include "ep.defs.h"
+#include "ep.tools.h"
+#include "ep.commonsyms.h"
 
 /*
 static t_symbol* ep_sym_version			= gensym("(v2.0)");

@@ -14,6 +14,7 @@
 		2CAAEC5219006C1F00A4EA4F /* ep.max.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CAAEC4D19006C1F00A4EA4F /* ep.max.cpp */; };
 		2CAAEC5319006C1F00A4EA4F /* ep.max.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CAAEC4E19006C1F00A4EA4F /* ep.max.h */; };
 		2CAAEC5419006C1F00A4EA4F /* ep.tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 2CAAEC4F19006C1F00A4EA4F /* ep.tools.h */; };
+		2CAAEC5619009B2C00A4EA4F /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CAAEC5519009B2C00A4EA4F /* AppKit.framework */; };
 		2CF5D5AC18E0EC9400554938 /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2CF5D5AB18E0EC9400554938 /* maxmspsdk.xcconfig */; };
 		8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F18A8BD17287341005FD621 /* Accelerate.framework */; };
 		8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */; };
@@ -27,6 +28,7 @@
 		2CAAEC4D19006C1F00A4EA4F /* ep.max.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ep.max.cpp; sourceTree = "<group>"; };
 		2CAAEC4E19006C1F00A4EA4F /* ep.max.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ep.max.h; sourceTree = "<group>"; };
 		2CAAEC4F19006C1F00A4EA4F /* ep.tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ep.tools.h; sourceTree = "<group>"; };
+		2CAAEC5519009B2C00A4EA4F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		2CF5D5AB18E0EC9400554938 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		2FBBEAE508F335360078DB84 /* c.notification.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = c.notification.mxo; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F18A8BD17287341005FD621 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -38,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CAAEC5619009B2C00A4EA4F /* AppKit.framework in Frameworks */,
 				2CAAEC491900238F00A4EA4F /* Foundation.framework in Frameworks */,
 				8F7EC130177AD88600AA6CFE /* CoreFoundation.framework in Frameworks */,
 				8F18A8BE17287341005FD621 /* Accelerate.framework in Frameworks */,
@@ -53,6 +56,7 @@
 				2CAAEC421900221800A4EA4F /* src */,
 				2CAAEC4A19006C1F00A4EA4F /* lib */,
 				2CF5D5AB18E0EC9400554938 /* maxmspsdk.xcconfig */,
+				2CAAEC5519009B2C00A4EA4F /* AppKit.framework */,
 				2CAAEC481900238F00A4EA4F /* Foundation.framework */,
 				8F7EC12F177AD88600AA6CFE /* CoreFoundation.framework */,
 				8F18A8BD17287341005FD621 /* Accelerate.framework */,

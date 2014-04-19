@@ -33,13 +33,26 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"frgb" : 0.0,
+					"id" : "obj-28",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 358.0, 309.0, 189.0, 20.0 ],
+					"text" : "suported image are .jpeg .png .gif"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"frgb" : 0.0,
 					"id" : "obj-20",
 					"linecount" : 7,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 15.0, 181.0, 107.0, 100.0 ],
-					"presentation_rect" : [ 53.0, 229.0, 0.0, 0.0 ],
 					"text" : "Active metro then switch to another app to see notification popup and sound (depend on your preferences)."
 				}
 
@@ -60,7 +73,6 @@
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 15.0, 153.0, 20.0, 20.0 ],
-					"presentation_rect" : [ 33.0, 229.0, 0.0, 0.0 ],
 					"rounded" : 60.0,
 					"text" : "4",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -78,9 +90,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 461.5, 87.5, 232.0, 33.0 ],
-					"presentation_rect" : [ 435.0, 280.0, 0.0, 0.0 ],
-					"text" : "Note : notifications only popup when Max App is in background."
+					"patching_rect" : [ 7.0, 87.5, 232.0, 33.0 ],
+					"text" : "Note : notifications only popup and sound when Max App is in background."
 				}
 
 			}
@@ -90,13 +101,11 @@
 					"fontsize" : 12.0,
 					"frgb" : 0.0,
 					"id" : "obj-18",
-					"linecount" : 2,
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 492.0, 253.0, 219.0, 33.0 ],
-					"presentation_rect" : [ 492.0, 257.0, 0.0, 0.0 ],
-					"text" : "Does notification should play a sound when Max app is in background ?"
+					"patching_rect" : [ 492.0, 253.0, 219.0, 20.0 ],
+					"text" : "Does notification should play a sound ?"
 				}
 
 			}
@@ -109,8 +118,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 324.0, 321.0, 275.0, 20.0 ],
-					"presentation_rect" : [ 321.0, 321.0, 0.0, 0.0 ],
+					"patching_rect" : [ 280.0, 347.0, 275.0, 20.0 ],
 					"text" : "Open your notification center to see notifications"
 				}
 
@@ -130,8 +138,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 301.0, 321.0, 20.0, 20.0 ],
-					"presentation_rect" : [ 301.0, 321.0, 0.0, 0.0 ],
+					"patching_rect" : [ 257.0, 347.0, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "3",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -150,7 +157,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 166.0, 167.0, 150.0, 33.0 ],
-					"presentation_rect" : [ 165.0, 156.0, 0.0, 0.0 ],
 					"text" : "Bang to schedule a notification"
 				}
 
@@ -171,7 +177,6 @@
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 144.0, 167.0, 20.0, 20.0 ],
-					"presentation_rect" : [ 139.0, 166.0, 0.0, 0.0 ],
 					"rounded" : 60.0,
 					"text" : "2",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -231,8 +236,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 51.0, 94.0, 150.0, 33.0 ],
-					"text" : "Set notification title, subtitle and description"
+					"patching_rect" : [ 352.0, 102.0, 166.0, 33.0 ],
+					"text" : "Set notification informations :\ntitle, subtitle and description"
 				}
 
 			}
@@ -251,7 +256,7 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 28.0, 94.0, 20.0, 20.0 ],
+					"patching_rect" : [ 329.0, 102.0, 20.0, 20.0 ],
 					"rounded" : 60.0,
 					"text" : "1",
 					"textcolor" : [ 0.34902, 0.34902, 0.34902, 1.0 ],
@@ -308,6 +313,7 @@
 					"patching_rect" : [ 144.0, 293.0, 77.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"description" : [ "Notification", "description" ],
+						"image" : "Macintosh HD:/Users/elioton/Documents/programmation/CICM/_capture_ecran/HoaMeterAnim_2.gif",
 						"playsound" : 1,
 						"subtitle" : [ "Notification", "subtitle" ],
 						"title" : [ "Notification", "title" ]
@@ -397,7 +403,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 15.0, 181.0, 107.0, 100.0 ],
-					"presentation_rect" : [ 44.0, 118.0, 0.0, 0.0 ],
 					"rounded" : 2,
 					"varname" : "autohelp_top_panel[1]"
 				}
@@ -433,7 +438,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 51.0, 94.0, 150.0, 33.0 ],
+					"patching_rect" : [ 352.0, 102.0, 164.0, 33.0 ],
 					"rounded" : 2,
 					"varname" : "autohelp_top_panel[3]"
 				}
@@ -451,7 +456,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 461.5, 87.5, 232.0, 33.0 ],
+					"patching_rect" : [ 7.0, 87.5, 232.0, 33.0 ],
 					"rounded" : 2,
 					"varname" : "autohelp_top_panel[4]"
 				}
@@ -469,7 +474,7 @@
 					"maxclass" : "panel",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 324.0, 321.0, 275.0, 20.0 ],
+					"patching_rect" : [ 280.0, 347.0, 275.0, 20.0 ],
 					"rounded" : 2,
 					"varname" : "autohelp_top_panel[5]"
 				}
@@ -486,6 +491,20 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 352.0, 221.0, 272.0, 20.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"attr" : "image",
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-9",
+					"maxclass" : "attrui",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 352.0, 282.0, 231.0, 20.0 ]
 				}
 
 			}
@@ -551,6 +570,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-8", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-9", 0 ]
 				}
 
 			}
