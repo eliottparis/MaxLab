@@ -54,6 +54,10 @@ void matrixui_perform64(t_matrixui *x, t_object *dsp64, double **ins, long numin
 t_max_err matrixui_notify(t_matrixui *x, t_symbol *s, t_symbol *msg, void *sender, void *data);
 void matrixui_getdrawparams(t_matrixui *x, t_object *patcherview, t_jboxdrawparams *params);
 
+void matrixui_preset(t_matrixui *x);
+t_max_err matrixui_setvalueof(t_matrixui *x, long ac, t_atom *av);
+t_max_err matrixui_getvalueof(t_matrixui *x, long *ac, t_atom **av);
+
 // -- mousing methods -- //
 
 void matrixui_mouse_move(t_matrixui *x, t_object *patcherview, t_pt pt, long modifiers);
@@ -75,6 +79,10 @@ void draw_background(t_matrixui *x, t_object *view, t_rect *rect);
 void draw_IO(t_matrixui *x, t_object *view, t_rect *rect);
 void draw_patchlines(t_matrixui *x, t_object *view, t_rect *rect);
 
+// -- messages methods -- //
+void matrixui_clear(t_matrixui *x);
+void matrixui_list(t_matrixui *x, t_symbol* s, long ac, t_atom* av);
+
 t_class *matrixui_class;
 
 int C74_EXPORT main()
@@ -90,8 +98,16 @@ int C74_EXPORT main()
 	class_addmethod(c, (method) matrixui_dsp64,				"dsp64",			A_CANT, 0);
 	class_addmethod(c, (method) matrixui_assist,			"assist",			A_CANT,	0);
 	class_addmethod(c, (method) matrixui_paint,				"paint",			A_CANT,	0);
-	class_addmethod(c, (method) matrixui_notify,			"notify",			A_CANT, 0);
 	class_addmethod(c, (method) matrixui_getdrawparams,		"getdrawparams",	A_CANT, 0);
+	class_addmethod(c, (method) matrixui_notify,			"notify",			A_CANT, 0);
+	
+	class_addmethod(c, (method) matrixui_clear,				"clear",			A_NOTHING, 0);
+	class_addmethod(c, (method) matrixui_list,				"list",				A_GIMME, 0);
+	
+	class_addmethod(c, (method) matrixui_preset,			"preset",			0);
+    class_addmethod(c, (method) matrixui_getvalueof,		"getvalueof",		A_CANT, 0);
+	class_addmethod(c, (method) matrixui_setvalueof,		"setvalueof",		A_CANT, 0);
+	
 	class_addmethod(c, (method) matrixui_mouse_down,		"mousedown",		A_CANT, 0);
 	class_addmethod(c, (method) matrixui_mouse_move,		"mousemove",		A_CANT, 0);
 	class_addmethod(c, (method) matrixui_mouse_leave,		"mouseleave",		A_CANT, 0);
@@ -225,6 +241,47 @@ void *matrixui_new(t_symbol *s, int argc, t_atom *argv)
 	jbox_ready((t_jbox *)x);
 
 	return (x);
+}
+
+void matrixui_clear(t_matrixui *x)
+{
+	for (int i = 0; i < x->f_number_of_inputs; i++)
+	{
+		x->f_matrix[i] = new t_pline[x->f_number_of_outputs];
+		for (int j = 0; j < x->f_number_of_outputs; j++)
+		{
+			x->f_matrix[i][j].exist = 0;
+			x->f_matrix[i][j].mouseover = 0;
+			x->f_matrix[i][j].selected = 0;
+		}
+	}
+	
+	jbox_invalidate_layer((t_object *)x, NULL, gensym("patchlines_layer"));
+	jbox_redraw((t_jbox *)x);
+}
+
+void matrixui_list(t_matrixui *x, t_symbol* s, long ac, t_atom* av)
+{
+	long inlet, outlet, value;
+	if (ac >= 3 && av)
+	{
+		for (int i=0; i<ac; i+=3)
+		{
+			if (i+3 <= ac && atom_gettype(av+i) == A_LONG && atom_gettype(av+i+1) == A_LONG && atom_gettype(av+i+2) == A_LONG)
+			{
+				inlet = atom_getlong(av+i);
+				outlet = atom_getlong(av+i+1);
+				value = atom_getlong(av+i+2);
+				if (isInside(inlet, 0, x->f_number_of_inputs-1) && isInside(outlet, 0, x->f_number_of_outputs-1))
+				{
+					x->f_matrix[inlet][outlet].exist = (value > 0);
+				}
+			}
+		}
+	}
+	
+	jbox_invalidate_layer((t_object *)x, NULL, gensym("patchlines_layer"));
+	jbox_redraw((t_jbox *)x);
 }
 
 t_max_err matrixui_setattr_number_of_inputs(t_matrixui *x, t_symbol *s, long ac, t_atom* av)
@@ -400,15 +457,50 @@ t_max_err matrixui_setattr_number_of_outputs(t_matrixui *x, t_symbol *s, long ac
 	return MAX_ERR_NONE;
 }
 
+void matrixui_preset(t_matrixui *x)
+{
+	/*
+	void* z;
+	long ac;
+	t_atom* av;
+	t_atom* avptr;
+	
+    if(!(z = gensym("_preset")->s_thing))
+        return;
+	
+	ac = (255*255);
+	av = (t_atom*)getbytes(ac * sizeof(t_atom));
+	avptr = av;
+	
+	atom_setobj(avptr++, x);
+    atom_setsym(avptr++, object_classname(x));
+	atom_setsym(avptr++, ep_sym_list);
+	atom_setsym(avptr++, hoa_sym_source_preset_data);
+	
+	binbuf_insert(z, NULL, (MAX_NUMBER_OF_SOURCES * 11 + 4), av);
+	freebytes(av, ac * sizeof(t_atom));
+	*/
+}
+
+t_max_err matrixui_setvalueof(t_matrixui *x, long ac, t_atom *av)
+{
+	return MAX_ERR_NONE;
+}
+
+t_max_err matrixui_getvalueof(t_matrixui *x, long *ac, t_atom **av)
+{
+	return MAX_ERR_NONE;
+}
+
 void matrixui_assist(t_matrixui *x, void *b, long m, long a, char *s)
 {
 	if (m == ASSIST_INLET)
 	{
-		sprintf(s,"(messages)");
+		sprintf(s,"(signal) input %ld", a + 1);
 	}
 	else
 	{
-        sprintf(s,"");
+        sprintf(s,"(signal) output %ld", a + 1);
 	}
 }
 
@@ -891,7 +983,6 @@ void matrixui_mouse_up(t_matrixui *x, t_object *patcherview, t_pt pt, long modif
 				if (isInside(x->f_last_mouse_drag.x, i * (x->f_rect.width / x->f_number_of_outputs), (i+1) * (x->f_rect.width / x->f_number_of_outputs)))
 				{
 					x->f_matrix[x->f_input_over_index][i].exist = 1;
-					//post("x->f_matrix[%i][%i] = %ld", x->f_input_over_index, i, x->f_matrix[x->f_input_over_index][i]);
 				}
 			}
 		}
@@ -928,12 +1019,16 @@ long matrixui_key(t_matrixui *x, t_object *patcherview, long keycode, long modif
 		for (int i=0; i<x->f_number_of_inputs; i++)
 			for (int j=0; j<x->f_number_of_outputs; j++)
 				x->f_matrix[i][j].selected = 1;
+		
+		jbox_invalidate_layer((t_object *)x, NULL, gensym("patchlines_layer"));
+		jbox_redraw((t_jbox *)x);
 	}
 	else if (textcharacter == 127) // backspace key
 	{
 		filter = 1;
 		
 		for (int i=0; i<x->f_number_of_inputs; i++)
+		{
 			for (int j=0; j<x->f_number_of_outputs; j++)
 			{
 				if (x->f_matrix[i][j].exist == 1 && x->f_matrix[i][j].selected)
@@ -943,6 +1038,10 @@ long matrixui_key(t_matrixui *x, t_object *patcherview, long keycode, long modif
 					x->f_matrix[i][j].selected = 0;
 				}
 			}
+		}
+		
+		jbox_invalidate_layer((t_object *)x, NULL, gensym("patchlines_layer"));
+		jbox_redraw((t_jbox *)x);
 	}
 	return filter;
 }
