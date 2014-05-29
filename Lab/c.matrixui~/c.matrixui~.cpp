@@ -267,11 +267,14 @@ void matrixui_list(t_matrixui *x, t_symbol* s, long ac, t_atom* av)
 	{
 		for (int i=0; i<ac; i+=3)
 		{
-			if (i+3 <= ac && atom_gettype(av+i) == A_LONG && atom_gettype(av+i+1) == A_LONG && atom_gettype(av+i+2) == A_LONG)
+			if (i+3 <= ac &&
+				(atom_gettype(av+i) == A_LONG || atom_gettype(av+i) == A_FLOAT) &&
+				(atom_gettype(av+i+1) == A_LONG || atom_gettype(av+i+1) == A_FLOAT) &&
+				(atom_gettype(av+i+2) == A_LONG || atom_gettype(av+i+2) == A_FLOAT))
 			{
-				inlet = atom_getlong(av+i);
-				outlet = atom_getlong(av+i+1);
-				value = atom_getlong(av+i+2);
+				inlet = round(atom_getfloat(av+i));
+				outlet = round(atom_getfloat(av+i+1));
+				value = round(atom_getfloat(av+i+2));
 				if (isInside(inlet, 0, x->f_number_of_inputs-1) && isInside(outlet, 0, x->f_number_of_outputs-1))
 				{
 					x->f_matrix[inlet][outlet].exist = (value > 0);
@@ -459,7 +462,6 @@ t_max_err matrixui_setattr_number_of_outputs(t_matrixui *x, t_symbol *s, long ac
 
 void matrixui_preset(t_matrixui *x)
 {
-	/*
 	void* z;
 	long ac;
 	t_atom* av;
@@ -468,27 +470,96 @@ void matrixui_preset(t_matrixui *x)
     if(!(z = gensym("_preset")->s_thing))
         return;
 	
-	ac = (255*255);
-	av = (t_atom*)getbytes(ac * sizeof(t_atom));
+	long max_ac = (255*255);
+	av = (t_atom*)getbytes(max_ac * sizeof(t_atom));
 	avptr = av;
+	
+	atom_setobj(av, x);
+    atom_setsym(av+1, object_classname(x));
+	atom_setsym(av+2, gensym("clear"));
+	binbuf_insert(z, NULL, 3, av);
 	
 	atom_setobj(avptr++, x);
     atom_setsym(avptr++, object_classname(x));
 	atom_setsym(avptr++, ep_sym_list);
-	atom_setsym(avptr++, hoa_sym_source_preset_data);
+	ac = 3;
 	
-	binbuf_insert(z, NULL, (MAX_NUMBER_OF_SOURCES * 11 + 4), av);
-	freebytes(av, ac * sizeof(t_atom));
-	*/
+	for (int i = 0; i < x->f_number_of_inputs; i++)
+	{
+		for (int j = 0; j < x->f_number_of_outputs; j++)
+		{
+			if (x->f_matrix[i][j].exist == 1)
+			{
+				ac += 3;
+				atom_setlong(avptr++, i);
+				atom_setlong(avptr++, j);
+				atom_setlong(avptr++, 1);
+			}
+		}
+	}
+	
+	if (ac == 3)
+	{
+		ac += 3;
+		atom_setlong(avptr++, 0);
+		atom_setlong(avptr++, 0);
+		atom_setlong(avptr++, 0);
+	}
+	
+	binbuf_insert(z, NULL, ac, av);
+	freebytes(av, max_ac * sizeof(t_atom));
 }
 
 t_max_err matrixui_setvalueof(t_matrixui *x, long ac, t_atom *av)
 {
+	object_method(x, gensym("clear"));
+	object_method_typed(x, gensym("list"), ac, av, NULL);
 	return MAX_ERR_NONE;
 }
 
 t_max_err matrixui_getvalueof(t_matrixui *x, long *ac, t_atom **av)
 {
+	if(ac && av)
+    {
+		t_atom *avptr;
+		
+		if(*ac > 0)
+			freebytes(*av, *ac * sizeof(t_atom));
+		
+		*ac = 0;
+		for (int i = 0; i < x->f_number_of_inputs; i++)
+			for (int j = 0; j < x->f_number_of_outputs; j++)
+				if (x->f_matrix[i][j].exist == 1)
+					*ac+=3;
+		
+		if (*ac == 0)
+		{
+			*ac = 3;
+		}
+		
+		avptr = *av = (t_atom *)getbytes(*ac * sizeof(t_atom));
+		
+		for (int i = 0; i < x->f_number_of_inputs; i++)
+		{
+			for (int j = 0; j < x->f_number_of_outputs; j++)
+			{
+				if (x->f_matrix[i][j].exist == 1)
+				{
+					atom_setlong(avptr++, i);
+					atom_setlong(avptr++, j);
+					atom_setlong(avptr++, 1);
+				}
+			}
+		}
+		
+		if (*ac == 3)
+		{
+			atom_setlong(avptr++, 0);
+			atom_setlong(avptr++, 0);
+			atom_setlong(avptr++, 0);
+		}
+    }
+	
 	return MAX_ERR_NONE;
 }
 
@@ -535,7 +606,6 @@ void matrixui_perform64(t_matrixui *x, t_object *dsp64, double **ins, long numin
 
 t_max_err matrixui_notify(t_matrixui *x, t_symbol *s, t_symbol *msg, void *sender, void *data)
 {
-	t_max_err err = MAX_ERR_NONE;
 	t_symbol *name;
 	
 	if (msg == gensym("attr_modified"))
@@ -571,9 +641,7 @@ t_max_err matrixui_notify(t_matrixui *x, t_symbol *s, t_symbol *msg, void *sende
 		jbox_redraw((t_jbox *)x);
 	}
 
-	err |= jbox_notify((t_jbox *)x, s, msg, sender, data);
-	
-	return err;
+	return jbox_notify((t_jbox *)x, s, msg, sender, data);
 }
 
 void matrixui_getdrawparams(t_matrixui *x, t_object *patcherview, t_jboxdrawparams *params)
@@ -974,6 +1042,7 @@ void matrixui_mouse_down(t_matrixui *x, t_object *patcherview, t_pt pt, long mod
 
 void matrixui_mouse_up(t_matrixui *x, t_object *patcherview, t_pt pt, long modifiers)
 {
+	int notify = 0;
 	if ( x->f_mouse_dragging && (x->f_input_over_index > -1 || x->f_output_over_index > -1))
 	{
 		if (x->f_input_over_index > -1 && isInside(x->f_last_mouse_drag.y, x->f_rect.height * 0.5, x->f_rect.height))
@@ -983,10 +1052,14 @@ void matrixui_mouse_up(t_matrixui *x, t_object *patcherview, t_pt pt, long modif
 				if (isInside(x->f_last_mouse_drag.x, i * (x->f_rect.width / x->f_number_of_outputs), (i+1) * (x->f_rect.width / x->f_number_of_outputs)))
 				{
 					x->f_matrix[x->f_input_over_index][i].exist = 1;
+					notify = 1;
 				}
 			}
 		}
 	}
+	
+	if (notify)
+		object_notify(x, ep_sym_modified, NULL);
 	
 	x->f_mouse_dragging = 0;
 	
@@ -1040,6 +1113,7 @@ long matrixui_key(t_matrixui *x, t_object *patcherview, long keycode, long modif
 			}
 		}
 		
+		object_notify(x, ep_sym_modified, NULL);
 		jbox_invalidate_layer((t_object *)x, NULL, gensym("patchlines_layer"));
 		jbox_redraw((t_jbox *)x);
 	}
